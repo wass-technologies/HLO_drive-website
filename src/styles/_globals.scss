@@ -1,0 +1,128 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ─── Reset ────────────────────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: $font-main;
+  background: $black;
+  color: $white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: $gold; color: $black; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: $black-2; }
+::-webkit-scrollbar-thumb { background: $gold-dark; border-radius: 3px; }
+
+// ─── Layout ───────────────────────────────────────────────
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+// ─── Shared Section Header ────────────────────────────────
+.section-tag { @include section-tag; }
+
+.section-header { text-align: center; margin-bottom: 64px; }
+
+.section-title {
+  font-family: $font-display;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: $white-50;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+// ─── Gold Text Utility ────────────────────────────────────
+.gold-text { @include gold-text; }
+
+// ─── Buttons ──────────────────────────────────────────────
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: $gradient-gold;
+  color: $black;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 16px 32px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: $transition;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-gold;
+  }
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: $white;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 15px 32px;
+  border-radius: 100px;
+  border: 1px solid $white-20;
+  cursor: pointer;
+  transition: $transition;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: $gold;
+    color: $gold;
+    transform: translateY(-2px);
+  }
+}
+
+// ─── Keyframe Animations ──────────────────────────────────
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 197, 24, 0.4); }
+  50%       { box-shadow: 0 0 0 20px rgba(245, 197, 24, 0); }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+// ─── Animation Utilities ──────────────────────────────────
+.animate-float      { animation: float 4s ease-in-out infinite; }
+.animate-pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
+.animate-spin-slow  { animation: spin-slow 20s linear infinite; }

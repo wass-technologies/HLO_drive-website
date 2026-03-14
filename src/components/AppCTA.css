@@ -1,0 +1,134 @@
+.appcta-section {
+  padding: 100px 0;
+  background: var(--black-2);
+  border-top: 1px solid var(--white-5);
+  position: relative;
+  overflow: hidden;
+}
+.appcta-bg { position: absolute; inset: 0; pointer-events: none; }
+.appcta-orb-1 {
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,197,24,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -100px; left: -100px;
+  filter: blur(60px);
+}
+.appcta-orb-2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(245,197,24,0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  bottom: -100px; right: -100px;
+  filter: blur(60px);
+}
+.appcta-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.appcta-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.appcta-desc {
+  font-size: 16px;
+  color: var(--white-50);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+.appcta-badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.appcta-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--black-3);
+  border: 1px solid var(--white-10);
+  border-radius: 100px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white-80);
+}
+.appcta-stores {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.store-btn-lg {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--black);
+  border: 1px solid rgba(245,197,24,0.3);
+  color: var(--white);
+  padding: 16px 28px;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: var(--transition);
+  min-width: 180px;
+}
+.store-btn-lg:hover {
+  background: rgba(245,197,24,0.08);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(245,197,24,0.15);
+}
+.store-sub-lg { display: block; font-size: 11px; color: var(--white-50); }
+.store-name-lg { display: block; font-size: 17px; font-weight: 700; }
+.appcta-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--white-50);
+}
+.rating-stars { display: flex; gap: 2px; }
+
+/* QR Card */
+.qr-card {
+  background: var(--black-3);
+  border: 1px solid rgba(245,197,24,0.2);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  text-align: center;
+  box-shadow: var(--shadow-gold);
+}
+.qr-placeholder {
+  width: 160px; height: 160px;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 12px;
+  margin: 0 auto 16px;
+}
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+  height: 100%;
+}
+.qr-cell {
+  background: #f0f0f0;
+  border-radius: 2px;
+}
+.qr-cell.filled { background: #0A0A0A; }
+.qr-label { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.qr-sub { font-size: 12px; color: var(--gold); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .appcta-inner { grid-template-columns: 1fr; }
+  .appcta-visual { display: flex; justify-content: center; }
+}

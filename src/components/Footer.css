@@ -1,0 +1,92 @@
+.footer {
+  background: var(--black-2);
+  border-top: 1px solid var(--white-5);
+  padding: 80px 0 0;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--white-5);
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.footer-tagline {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.footer-about {
+  font-size: 13px;
+  color: var(--white-50);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  max-width: 300px;
+}
+.footer-contact { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--white-50);
+}
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  background: var(--black-3);
+  border: 1px solid var(--white-10);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-50);
+  transition: var(--transition);
+  text-decoration: none;
+}
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+.footer-links-group h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.footer-links-group ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links-group a {
+  font-size: 13px;
+  color: var(--white-50);
+  text-decoration: none;
+  transition: var(--transition);
+}
+.footer-links-group a:hover { color: var(--gold); padding-left: 4px; }
+.footer-bottom {
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+}
+.footer-bottom p { font-size: 12px; color: var(--white-50); }
+.footer-seo-text { font-size: 11px !important; color: rgba(255,255,255,0.2) !important; }
+
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .footer-top { grid-template-columns: 1fr; }
+}
