@@ -1,0 +1,72 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.stats {
+  padding: 80px 0;
+  background: $black-2;
+  border-top: 1px solid $white-5;
+  border-bottom: 1px solid $white-5;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    @include respond($bp-sm) { grid-template-columns: repeat(2, 1fr); }
+    @include respond($bp-xxs) { grid-template-columns: 1fr; }
+  }
+
+  &__card {
+    text-align: center;
+    padding: 40px 24px;
+    border-right: 1px solid $white-5;
+    position: relative;
+
+    &:last-child { border-right: none; }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 40px; height: 2px;
+      background: $gradient-gold;
+      border-radius: 2px;
+    }
+
+    @include respond($bp-sm) {
+      &:nth-child(2) { border-right: none; }
+      &:nth-child(3) { border-right: 1px solid $white-5; border-top: 1px solid $white-5; }
+      &:nth-child(4) { border-top: 1px solid $white-5; }
+    }
+
+    @include respond($bp-xxs) {
+      border-right: none;
+      border-top: 1px solid $white-5;
+      &:first-child { border-top: none; }
+    }
+  }
+
+  &__num {
+    font-family: $font-display;
+    font-size: 52px;
+    font-weight: 800;
+    @include gold-text;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 2px;
+
+    span { font-size: 28px; }
+  }
+
+  &__label {
+    font-size: 16px;
+    font-weight: 700;
+    color: $white;
+    margin-bottom: 4px;
+  }
+
+  &__sub { font-size: 12px; color: $white-50; }
+}

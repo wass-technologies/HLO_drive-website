@@ -1,0 +1,80 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.services {
+  padding: 100px 0;
+  background: $black-2;
+  border-top: 1px solid $white-5;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+
+    @include respond($bp-lg)  { grid-template-columns: repeat(2, 1fr); }
+    @include respond($bp-xs)  { grid-template-columns: 1fr; }
+  }
+
+  &__card {
+    background: $black-3;
+    border: 1px solid $white-5;
+    border-radius: $radius-lg;
+    padding: 32px 24px;
+    position: relative;
+    transition: $transition;
+    cursor: pointer;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: $gradient-gold;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      border-color: rgba(245,197,24,0.2);
+      transform: translateY(-6px);
+      box-shadow: $shadow-card;
+
+      &::after { transform: scaleX(1); }
+    }
+  }
+
+  &__tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+
+    &--gold   { background: rgba(245,197,24,0.1); color: $gold;   border: 1px solid rgba(245,197,24,0.2); }
+    &--green  { background: rgba(34,197,94,0.1);  color: $green;  border: 1px solid rgba(34,197,94,0.2); }
+    &--blue   { background: rgba(96,165,250,0.1); color: $blue;   border: 1px solid rgba(96,165,250,0.2); }
+    &--purple { background: rgba(192,132,252,0.1);color: $purple; border: 1px solid rgba(192,132,252,0.2); }
+  }
+
+  &__icon {
+    @include icon-box(52px, 14px);
+    margin-bottom: 20px;
+  }
+
+  &__title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+
+  &__desc { font-size: 13px; color: $white-50; line-height: 1.7; margin-bottom: 20px; }
+
+  &__cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: $gold;
+    transition: $transition;
+
+    .services__card:hover & { letter-spacing: 0.5px; }
+  }
+}

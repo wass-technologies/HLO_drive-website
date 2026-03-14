@@ -1,11 +1,11 @@
 @use 'variables' as *;
 
-// ─── Responsive ───────────────────────────────────────────
+// ── Responsive ────────────────────────────────────────────
 @mixin respond($bp) {
   @media (max-width: $bp) { @content; }
 }
 
-// ─── Gold Gradient Text ───────────────────────────────────
+// ── Gold Gradient Text ────────────────────────────────────
 @mixin gold-text {
   background: $gradient-gold;
   -webkit-background-clip: text;
@@ -13,42 +13,53 @@
   background-clip: text;
 }
 
-// ─── Flex Center ──────────────────────────────────────────
+// ── Flex Center ───────────────────────────────────────────
 @mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-// ─── Gold Border Box ──────────────────────────────────────
-@mixin gold-box($opacity: 0.1, $border-opacity: 0.2) {
-  background: rgba(245, 197, 24, $opacity);
-  border: 1px solid rgba(245, 197, 24, $border-opacity);
+// ── Gold Tinted Box ───────────────────────────────────────
+@mixin gold-box($bg: 0.08, $border: 0.2) {
+  background: rgba(245,197,24,$bg);
+  border: 1px solid rgba(245,197,24,$border);
 }
 
-// ─── Card Base ────────────────────────────────────────────
-@mixin card-base {
+// ── Dark Card ─────────────────────────────────────────────
+@mixin card {
   background: $black-2;
   border: 1px solid $white-5;
   border-radius: $radius-lg;
   transition: $transition;
 }
 
-// ─── Hover Lift ───────────────────────────────────────────
+// ── Hover Lift ────────────────────────────────────────────
 @mixin hover-lift($y: -6px) {
   &:hover {
     transform: translateY($y);
-    border-color: rgba(245, 197, 24, 0.3);
+    border-color: rgba(245,197,24,0.3);
     box-shadow: $shadow-gold;
   }
 }
 
-// ─── Section Tag ──────────────────────────────────────────
-@mixin section-tag {
+// ── Icon Box ──────────────────────────────────────────────
+@mixin icon-box($size: 52px, $r: 14px) {
+  width: $size;
+  height: $size;
+  @include gold-box;
+  border-radius: $r;
+  @include flex-center;
+  color: $gold;
+  flex-shrink: 0;
+}
+
+// ── Section Tag ───────────────────────────────────────────
+@mixin tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  @include gold-box(0.08, 0.25);
+  @include gold-box;
   color: $gold;
   font-size: 12px;
   font-weight: 600;
@@ -57,15 +68,4 @@
   padding: 8px 16px;
   border-radius: 100px;
   margin-bottom: 20px;
-}
-
-// ─── Icon Box ─────────────────────────────────────────────
-@mixin icon-box($size: 52px, $radius: 14px) {
-  width: $size;
-  height: $size;
-  @include gold-box(0.08, 0.15);
-  border-radius: $radius;
-  @include flex-center;
-  color: $gold;
-  flex-shrink: 0;
 }

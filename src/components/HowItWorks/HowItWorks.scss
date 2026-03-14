@@ -1,0 +1,64 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.hiw {
+  padding: 100px 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+
+    @include respond($bp-sm) { grid-template-columns: 1fr; }
+  }
+
+  &__card {
+    @include card;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(245,197,24,0.05) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    @include hover-lift;
+
+    &:hover::before { opacity: 1; }
+  }
+
+  &__step-num {
+    font-family: $font-display;
+    font-size: 72px;
+    font-weight: 800;
+    color: rgba(245,197,24,0.08);
+    position: absolute;
+    top: 16px; right: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  &__icon {
+    @include icon-box(64px, 18px);
+    margin-bottom: 24px;
+  }
+
+  &__title { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+
+  &__desc { font-size: 14px; color: $white-50; line-height: 1.7; }
+
+  &__connector {
+    position: absolute;
+    top: 50%; right: -20px;
+    width: 40px; height: 2px;
+    background: linear-gradient(to right, rgba(245,197,24,0.4), rgba(245,197,24,0.1));
+    z-index: 1;
+
+    @include respond($bp-sm) { display: none; }
+  }
+}

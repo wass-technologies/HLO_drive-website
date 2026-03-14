@@ -1,0 +1,26 @@
+@use '../../styles/variables' as *;
+
+.marquee {
+  background: rgba(245,197,24,0.06);
+  border-top: 1px solid rgba(245,197,24,0.15);
+  border-bottom: 1px solid rgba(245,197,24,0.15);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &__track {
+    display: inline-flex;
+    animation: marquee 30s linear infinite;
+  }
+
+  &__item {
+    font-size: 13px;
+    font-weight: 500;
+    color: $white-50;
+    padding: 0 32px;
+    border-right: 1px solid $white-10;
+    transition: color 0.3s;
+
+    &:hover { color: $gold; }
+  }
+}

@@ -1,0 +1,132 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: $transition;
+
+  &--scrolled {
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(245,197,24,0.15);
+    padding: 14px 0;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  &__logo-hlo {
+    font-family: $font-display;
+    font-size: 26px;
+    font-weight: 800;
+    @include gold-text;
+  }
+
+  &__logo-drive {
+    font-family: $font-display;
+    font-size: 26px;
+    font-weight: 800;
+    color: $white;
+  }
+
+  &__logo-dot {
+    color: $gold;
+    font-size: 8px;
+    margin-left: 2px;
+    margin-bottom: 12px;
+  }
+
+  &__links {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+    margin-left: auto;
+
+    @include respond($bp-md) { display: none; }
+  }
+
+  &__link {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: $white-80;
+    transition: $transition;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: $gold;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    &:hover {
+      color: $gold;
+      &::after { width: 100%; }
+    }
+  }
+
+  &__cta {
+    font-size: 13px;
+    padding: 12px 24px;
+    flex-shrink: 0;
+
+    @include respond($bp-md) { display: none; }
+  }
+
+  &__hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: $white;
+    cursor: pointer;
+    margin-left: auto;
+
+    @include respond($bp-md) { display: flex; }
+  }
+
+  &__mobile {
+    background: $black-2;
+    border-top: 1px solid $white-10;
+    padding: 16px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+  }
+
+  &__mobile-link {
+    padding: 14px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: $white-80;
+    border-bottom: 1px solid $white-5;
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover { color: $gold; padding-left: 8px; }
+  }
+
+  &__mobile-cta {
+    margin-top: 16px;
+    justify-content: center;
+    width: 100%;
+  }
+}

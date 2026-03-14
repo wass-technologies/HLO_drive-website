@@ -1,48 +1,43 @@
-// ─── Colors ───────────────────────────────────────────────
-$gold:          #F5C518;
-$gold-light:    #FFD84D;
-$gold-dark:     #C9A000;
-$black:         #0A0A0A;
-$black-2:       #111111;
-$black-3:       #1A1A1A;
-$black-4:       #222222;
-$white:         #FFFFFF;
-$green:         #22c55e;
-$blue:          #60a5fa;
-$purple:        #c084fc;
+// ── Colors ────────────────────────────────────────────────
+$gold:        #F5C518;
+$gold-light:  #FFD84D;
+$gold-dark:   #C9A000;
+$black:       #0A0A0A;
+$black-2:     #111111;
+$black-3:     #1A1A1A;
+$black-4:     #222222;
+$white:       #FFFFFF;
+$green:       #22c55e;
+$blue:        #60a5fa;
+$purple:      #c084fc;
 
-// ─── Opacity Whites ───────────────────────────────────────
-$white-80:  rgba(255, 255, 255, 0.80);
-$white-50:  rgba(255, 255, 255, 0.50);
-$white-20:  rgba(255, 255, 255, 0.20);
-$white-10:  rgba(255, 255, 255, 0.10);
-$white-5:   rgba(255, 255, 255, 0.05);
+// ── Alpha Whites ──────────────────────────────────────────
+$white-80: rgba(255,255,255,0.80);
+$white-50: rgba(255,255,255,0.50);
+$white-20: rgba(255,255,255,0.20);
+$white-10: rgba(255,255,255,0.10);
+$white-5:  rgba(255,255,255,0.05);
 
-// ─── Gradients ────────────────────────────────────────────
+// ── Gradients ─────────────────────────────────────────────
 $gradient-gold: linear-gradient(135deg, #F5C518 0%, #FFD84D 50%, #C9A000 100%);
-$gradient-dark: linear-gradient(180deg, #0A0A0A 0%, #111111 100%);
 
-// ─── Typography ───────────────────────────────────────────
+// ── Typography ────────────────────────────────────────────
 $font-main:    'Inter', sans-serif;
 $font-display: 'Syne', sans-serif;
 
-// ─── Spacing ──────────────────────────────────────────────
-$section-padding: 100px 0;
-
-// ─── Border Radius ────────────────────────────────────────
+// ── Radius ────────────────────────────────────────────────
 $radius:    16px;
 $radius-lg: 24px;
 $radius-xl: 32px;
 
-// ─── Shadows ──────────────────────────────────────────────
-$shadow-gold: 0 0 40px rgba(245, 197, 24, 0.25);
-$shadow-card: 0 24px 64px rgba(0, 0, 0, 0.6);
+// ── Shadows ───────────────────────────────────────────────
+$shadow-gold: 0 0 40px rgba(245,197,24,0.25);
+$shadow-card: 0 24px 64px rgba(0,0,0,0.6);
 
-// ─── Transitions ──────────────────────────────────────────
-$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+// ── Transition ────────────────────────────────────────────
+$transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 
-// ─── Breakpoints ──────────────────────────────────────────
-$bp-xl:  1200px;
+// ── Breakpoints ───────────────────────────────────────────
 $bp-lg:  1024px;
 $bp-md:  900px;
 $bp-sm:  768px;
