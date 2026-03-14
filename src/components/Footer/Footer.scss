@@ -2,131 +2,133 @@
 @use '../../styles/mixins' as *;
 
 .footer {
+  width: 100%;
   background: $black-2;
-  border-top: 1px solid $white-5;
-  padding: 80px 0 0;
+  color: rgba(255, 255, 255, 0.70);
+  padding: 48px 24px 0;
 
+  @media (min-width: 768px)  { padding: 48px 64px 0; }
+  @media (min-width: 1024px) { padding: 48px 144px 0; }
+
+  // ── Top Row ─────────────────────────────────────────────
   &__top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 60px;
-    border-bottom: 1px solid $white-5;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 
-    @include respond($bp-md) { grid-template-columns: 1fr 1fr; }
-    @include respond($bp-xs) { grid-template-columns: 1fr; }
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
+  // ── Brand ───────────────────────────────────────────────
   &__brand {
-    @include respond($bp-md) { grid-column: 1 / -1; }
+    max-width: 100%;
+
+    @media (min-width: 768px) { max-width: 380px; }
   }
 
   &__logo {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 24px;
+    filter: brightness(1.05);
+  }
+
+  &__desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.60);
+    margin-bottom: 20px;
+  }
+
+  // ── App Store Buttons ───────────────────────────────────
+  &__apps {
     display: flex;
     align-items: center;
-    gap: 2px;
-    margin-bottom: 4px;
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
-  &__logo-hlo {
-    font-family: $font-display;
-    font-size: 26px;
-    font-weight: 800;
-    @include gold-text;
+  &__app-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: $black-3;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 8px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: $primary;
+    transition: $transition;
+    height: 44px;
+
+    &:hover {
+      border-color: $secondary;
+      background: rgba(244, 194, 39, 0.06);
+      transform: translateY(-2px);
+    }
   }
 
-  &__logo-drive {
-    font-family: $font-display;
-    font-size: 26px;
-    font-weight: 800;
-    color: $white;
+  &__app-sub  { display: block; font-size: 9px;  color: rgba(255,255,255,0.50); line-height: 1.2; }
+  &__app-name { display: block; font-size: 13px; font-weight: 700; line-height: 1.4; }
+
+  // ── Columns ─────────────────────────────────────────────
+  &__cols {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 60px;
+
+    @media (min-width: 768px) {
+      justify-content: flex-end;
+      gap: 80px;
+    }
   }
 
-  &__tagline {
-    font-family: $font-display;
-    font-size: 13px;
-    color: $gold;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-  }
-
-  &__about {
-    font-size: 13px;
-    color: $white-50;
-    line-height: 1.7;
+  &__col-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: $primary;
     margin-bottom: 20px;
-    max-width: 300px;
+  }
+
+  &__col-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__col-link {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover { color: $primary; }
   }
 
   &__contact {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-
-  &__contact-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: $white-50;
-  }
-
-  &__social {
-    display: flex;
-    gap: 12px;
-
-    a {
-      width: 36px; height: 36px;
-      background: $black-3;
-      border: 1px solid $white-10;
-      border-radius: 10px;
-      @include flex-center;
-      color: $white-50;
-      transition: $transition;
-      text-decoration: none;
-
-      &:hover { border-color: $gold; color: $gold; transform: translateY(-2px); }
-    }
-  }
-
-  &__col-title {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: $white;
-    margin-bottom: 20px;
-  }
-
-  &__col-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
     gap: 10px;
-
-    a {
-      font-size: 13px;
-      color: $white-50;
-      text-decoration: none;
-      transition: $transition;
-
-      &:hover { color: $gold; padding-left: 4px; }
-    }
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
   }
 
-  &__bottom {
-    padding: 24px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
+  // ── Copyright Bar ───────────────────────────────────────
+  &__copy {
+    padding: 20px 0;
     text-align: center;
-
-    p { font-size: 12px; color: $white-50; }
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.55);
   }
-
-  &__seo { font-size: 11px !important; color: rgba(255,255,255,0.15) !important; }
 }

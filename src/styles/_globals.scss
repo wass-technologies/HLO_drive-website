@@ -9,16 +9,16 @@ html { scroll-behavior: smooth; }
 body {
   font-family: $font-main;
   background: $black;
-  color: $white;
+  color: $primary;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: $gold; color: $black; }
+::selection { background: $secondary; color: $black; }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: $black-2; }
-::-webkit-scrollbar-thumb { background: $gold-dark; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: $secondary-dark; border-radius: 3px; }
 
 // ── Layout ────────────────────────────────────────────────
 .container {
@@ -27,38 +27,71 @@ body {
   padding: 0 24px;
 }
 
-// ── Shared Utilities ──────────────────────────────────────
-.gold-text { @include gold-text; }
+// ── Utilities ─────────────────────────────────────────────
 
-.section-tag { @include tag; }
+// White text (primary)
+.text-primary { color: $primary; }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 64px;
+// Gold gradient text (secondary)
+.gold-text {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
+
+// Blue accent text
+.accent-text {
+  background: $gradient-secondary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ── Section Shared ────────────────────────────────────────
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(244,194,39,0.08);
+  border: 1px solid rgba(244,194,39,0.25);
+  color: $secondary;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.section-header { text-align: center; margin-bottom: 64px; }
 
 .section-title {
   font-family: $font-display;
   font-size: clamp(32px, 4vw, 52px);
   font-weight: 800;
   line-height: 1.15;
+  color: $primary;
   margin-bottom: 16px;
 }
 
 .section-desc {
   font-size: 16px;
-  color: $white-50;
+  color: $primary-50;
   max-width: 480px;
   margin: 0 auto;
   line-height: 1.7;
 }
 
 // ── Buttons ───────────────────────────────────────────────
+
+// Primary CTA — gold gradient (secondary color)
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: $gradient-gold;
+  background: $gradient-primary;
   color: $black;
   font-weight: 700;
   font-size: 15px;
@@ -70,26 +103,57 @@ body {
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover { transform: translateY(-2px); box-shadow: $shadow-gold; }
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-primary;
+  }
 }
 
-.btn-outline {
+// Secondary CTA — blue accent
+.btn-accent {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: transparent;
-  color: $white;
-  font-weight: 600;
+  background: $gradient-secondary;
+  color: $primary;
+  font-weight: 700;
   font-size: 15px;
-  padding: 15px 32px;
+  padding: 16px 32px;
   border-radius: 100px;
-  border: 1px solid $white-20;
+  border: none;
   cursor: pointer;
   transition: $transition;
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover { border-color: $gold; color: $gold; transform: translateY(-2px); }
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-secondary;
+  }
+}
+
+// Outline — white border
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: $primary;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 15px 32px;
+  border-radius: 100px;
+  border: 1px solid $primary-20;
+  cursor: pointer;
+  transition: $transition;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: $secondary;
+    color: $secondary;
+    transform: translateY(-2px);
+  }
 }
 
 // ── Keyframes ─────────────────────────────────────────────
@@ -103,5 +167,5 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-// ── Animation Helpers ─────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────
 .animate-float { animation: float 4s ease-in-out infinite; }

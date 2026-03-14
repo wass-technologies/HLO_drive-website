@@ -1,1 +1,9 @@
-/* All styles are in src/styles/main.scss and component SCSS files */
+.app {
+  min-height: 100vh;
+  background: #0A0A0A;
+}
+
+.app__placeholder {
+  height: 200vh;
+  background: linear-gradient(180deg, #ffffff 0%, #ebebeb 50%, #ffffff 100%);
+}

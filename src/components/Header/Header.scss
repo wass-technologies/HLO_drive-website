@@ -1,0 +1,197 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+
+  // ── Scrolled: glass ───────────────────────────────────
+  &--scrolled {
+    background: rgba(10, 10, 10, 0.60);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  // ── Silver bottom line ────────────────────────────────
+  &__line {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent       0%,
+      rgba(192,192,192,0.15) 15%,
+      rgba(220,220,220,0.50) 50%,
+      rgba(192,192,192,0.15) 85%,
+      transparent       100%
+    );
+  }
+
+  // ── Inner ─────────────────────────────────────────────
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  // ── Logo ──────────────────────────────────────────────
+  &__logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      // slight brightness boost so logo pops on dark bg
+      filter: brightness(1.05);
+      transition: $transition;
+    }
+
+    &:hover img { filter: brightness(1.15); }
+  }
+
+  // ── Desktop Nav ───────────────────────────────────────
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-left: auto;
+
+    @include respond($bp-md) { display: none; }
+  }
+
+  &__nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    // PRIMARY = white
+    color: $primary-80;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      // SECONDARY = gold from logo
+      background: $gradient-primary;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      // PRIMARY = full white on hover
+      color: $primary;
+      &::after { width: 100%; }
+    }
+  }
+
+  // ── Desktop CTA ───────────────────────────────────────
+  &__cta {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    // SECONDARY = gold gradient from logo
+    background: $gradient-primary;
+    color: $black;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: $transition;
+    white-space: nowrap;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(244, 194, 39, 0.40);
+    }
+
+    @include respond($bp-md) { display: none; }
+  }
+
+  // ── Hamburger ─────────────────────────────────────────
+  &__hamburger {
+    display: none;
+    background: none;
+    border: none;
+    // PRIMARY = white icon
+    color: $primary;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+    transition: $transition;
+
+    // SECONDARY = gold on hover
+    &:hover { color: $secondary; }
+
+    @include respond($bp-md) { display: flex; align-items: center; }
+  }
+
+  // ── Mobile Menu ───────────────────────────────────────
+  &__mobile {
+    overflow: hidden;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(220, 220, 220, 0.10);
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__mobile-link {
+    display: block;
+    padding: 16px 0;
+    font-size: 15px;
+    font-weight: 500;
+    // PRIMARY = white
+    color: $primary-80;
+    text-decoration: none;
+    border-bottom: 1px solid $primary-5;
+    transition: $transition;
+
+    &:hover {
+      // SECONDARY = gold on hover
+      color: $secondary;
+      padding-left: 8px;
+    }
+  }
+
+  &__mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    // SECONDARY = gold gradient
+    background: $gradient-primary;
+    color: $black;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    margin: 20px 0 24px;
+    transition: $transition;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(244, 194, 39, 0.40);
+    }
+  }
+}
