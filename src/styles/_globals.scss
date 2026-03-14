@@ -48,6 +48,53 @@ body {
   background-clip: text;
 }
 
+// ── Global Badge ──────────────────────────────────────────
+.g-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: $font-poppins;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #7c3aed;
+  background: rgba(124,58,237,0.08);
+  border: 1px solid rgba(124,58,237,0.22);
+  border-radius: 100px;
+  padding: 5px 14px;
+  animation: g-badge-pulse 2.5s ease-in-out infinite;
+
+  &::before {
+    content: '✦';
+    font-size: 9px;
+  }
+}
+
+// ── Global Section Heading ────────────────────────────────
+.g-heading {
+  font-family: $font-poppins;
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1f2937;
+  letter-spacing: -0.5px;
+}
+
+// ── Global Section Subtext ────────────────────────────────
+.g-subtext {
+  font-family: $font-poppins;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #6b7280;
+}
+
+@keyframes g-badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(124,58,237,0.25); }
+  50%       { box-shadow: 0 0 0 5px rgba(124,58,237,0);    }
+}
+
 // ── Section Shared ────────────────────────────────────────
 .section-tag {
   display: inline-flex;

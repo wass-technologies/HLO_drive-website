@@ -44,8 +44,9 @@ $white-5:       $primary-5;
 $gradient-gold: $gradient-primary;
 
 // ── Typography ────────────────────────────────────────────
-$font-main:    'Inter', sans-serif;
-$font-display: 'Syne', sans-serif;
+$font-main:    'Poppins', 'Inter', sans-serif;
+$font-display: 'Poppins', 'Syne', sans-serif;
+$font-poppins: 'Poppins', sans-serif;
 
 // ── Radius ────────────────────────────────────────────────
 $radius:    16px;

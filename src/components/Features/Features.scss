@@ -1,0 +1,120 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.feat {
+  background: #f6f6f6;
+  padding: 100px 0 120px;
+
+  // ── Container — same max-width as header/footer ────────
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  // ── Section header ────────────────────────────────────
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+
+  &__heading {
+    color: #1f2937;
+    font-size: clamp(28px, 3.5vw, 44px);
+  }
+
+  &__subtext {
+    max-width: 480px;
+  }
+
+  // ── Card ──────────────────────────────────────────────
+  &__card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.07);
+    margin-bottom: 32px;
+    opacity: 0; // GSAP animates this in
+
+    &:last-child { margin-bottom: 0; }
+
+    // Flip — image on right
+    &--flip {
+      direction: rtl;
+      > * { direction: ltr; }
+    }
+
+    @include respond($bp-md) {
+      grid-template-columns: 1fr;
+      direction: ltr;
+      > * { direction: ltr; }
+    }
+  }
+
+  // ── Image side ────────────────────────────────────────
+  &__img-wrap {
+    position: relative;
+    overflow: hidden;
+    min-height: 440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include respond($bp-md) { min-height: 280px; }
+  }
+
+  &__img {
+    // taller than container so yPercent travel never shows edges
+    width: 78%;
+    height: 140%;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+    will-change: transform;
+    display: block;
+    flex-shrink: 0;
+
+    @include respond($bp-md) { width: 68%; height: 140%; }
+  }
+
+  // ── Text side ─────────────────────────────────────────
+  &__text-wrap {
+    display: flex;
+    align-items: center;
+    padding: 56px 52px;
+
+    @include respond($bp-lg) { padding: 48px 40px; }
+    @include respond($bp-md) { padding: 36px 28px; }
+    @include respond($bp-xs) { padding: 28px 20px; }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 420px;
+  }
+
+  &__num {
+    font-family: $font-poppins;
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+    color: rgba(0,0,0,0.04);
+    letter-spacing: -4px;
+    user-select: none;
+    margin-bottom: -10px;
+  }
+
+  &__title {
+    font-size: clamp(20px, 2.4vw, 32px);
+    color: #1f2937;
+    line-height: 1.25;
+  }
+}

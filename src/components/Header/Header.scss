@@ -1,41 +1,75 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
 
+// ── Shared silver line mixin ───────────────────────────────
+@mixin silver-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent            0%,
+    rgba(192,192,192,0.12) 10%,
+    rgba(220,220,220,0.55) 50%,
+    rgba(192,192,192,0.12) 90%,
+    transparent            100%
+  );
+}
+
 .header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
   background: transparent;
   transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
 
-  // ── Scrolled: glass ───────────────────────────────────
+  // ── Announcement Banner ─────────────────────────────────
+  &__banner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #1fac40 0%, #3a811e 50%, #00e188 100%);
+    padding: 10px 24px;
+     font-size: 13px;
+    font-weight: 500;
+    color: $white;
+    text-align: center;
+    cursor: default;
+  }
+
+  &__banner-link {
+    color: $white;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.2s ease;
+
+    &:hover { opacity: 0.80; }
+  }
+
+  // ── Scrolled: black glass ─────────────────────────────
   &--scrolled {
-    background: rgba(10, 10, 10, 0.60);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
+
+    // Logo stays white on scroll
+    .header__logo img {
+      filter: brightness(0) invert(1);
+    }
   }
 
   // ── Silver bottom line ────────────────────────────────
   &__line {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent       0%,
-      rgba(192,192,192,0.15) 15%,
-      rgba(220,220,220,0.50) 50%,
-      rgba(192,192,192,0.15) 85%,
-      transparent       100%
-    );
+    @include silver-line;
   }
 
   // ── Inner ─────────────────────────────────────────────
   &__inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 32px;
     height: 70px;
     display: flex;
     align-items: center;
@@ -54,12 +88,14 @@
       width: auto;
       object-fit: contain;
       display: block;
-      // slight brightness boost so logo pops on dark bg
-      filter: brightness(1.05);
-      transition: $transition;
+      // Default: full white (grayscale + invert)
+      filter: brightness(0) invert(1);
+      transition: filter 0.4s ease;
     }
 
-    &:hover img { filter: brightness(1.15); }
+    &:hover img {
+      filter: brightness(0) invert(1) opacity(0.85);
+    }
   }
 
   // ── Desktop Nav ───────────────────────────────────────
@@ -75,8 +111,7 @@
   &__nav-link {
     font-size: 14px;
     font-weight: 500;
-    // PRIMARY = white
-    color: $primary-80;
+    color: #000;                    // ← black by default
     text-decoration: none;
     position: relative;
     transition: color 0.3s ease;
@@ -84,21 +119,24 @@
     &::after {
       content: '';
       position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      // SECONDARY = gold from logo
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
       background: $gradient-primary;
       border-radius: 2px;
       transition: width 0.3s ease;
     }
 
     &:hover {
-      // PRIMARY = full white on hover
-      color: $primary;
+      color: $secondary;
       &::after { width: 100%; }
     }
+  }
+
+  // On scroll — nav links turn white
+  &--scrolled &__nav-link {
+    color: $white;
+
+    &:hover { color: $secondary; }
   }
 
   // ── Desktop CTA ───────────────────────────────────────
@@ -107,20 +145,20 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    // SECONDARY = gold gradient from logo
-    background: $gradient-primary;
-    color: $black;
+    background: #111111;
+    color: #ffffff;
     font-size: 13px;
     font-weight: 700;
     padding: 10px 24px;
-    border-radius: 100px;
+    border-radius: 8px;
     text-decoration: none;
     transition: $transition;
     white-space: nowrap;
 
     &:hover {
+      background: #000000;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(244, 194, 39, 0.40);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     }
 
     @include respond($bp-md) { display: none; }
@@ -129,69 +167,195 @@
   // ── Hamburger ─────────────────────────────────────────
   &__hamburger {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
     background: none;
     border: none;
-    // PRIMARY = white icon
-    color: $primary;
     cursor: pointer;
-    padding: 4px;
+    padding: 6px;
     margin-left: auto;
-    transition: $transition;
+    width: 36px;
+    height: 36px;
 
-    // SECONDARY = gold on hover
-    &:hover { color: $secondary; }
-
-    @include respond($bp-md) { display: flex; align-items: center; }
+    @include respond($bp-md) { display: flex; }
   }
 
-  // ── Mobile Menu ───────────────────────────────────────
-  &__mobile {
-    overflow: hidden;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(220, 220, 220, 0.10);
-    padding: 0 24px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__mobile-link {
+  &__ham-bar {
     display: block;
-    padding: 16px 0;
-    font-size: 15px;
-    font-weight: 500;
-    // PRIMARY = white
-    color: $primary-80;
-    text-decoration: none;
-    border-bottom: 1px solid $primary-5;
-    transition: $transition;
+    width: 22px;
+    height: 2px;
+    background: #000;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+    transform-origin: center;
 
-    &:hover {
-      // SECONDARY = gold on hover
-      color: $secondary;
-      padding-left: 8px;
-    }
+    &--2 { width: 16px; }
+
+    &--1.open { transform: translateY(7px) rotate(45deg); width: 22px; }
+    &--2.open { opacity: 0; transform: scaleX(0); }
+    &--3.open { transform: translateY(-7px) rotate(-45deg); width: 22px; }
   }
 
-  &__mobile-cta {
-    display: inline-flex;
+  &--scrolled &__ham-bar { background: #fff; }
+}
+
+// ── Overlay ───────────────────────────────────────────────
+.header__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1100;
+}
+
+// ── Left Drawer ───────────────────────────────────────────
+.header__drawer {
+  position: fixed;
+  top: 0; left: 0;
+  width: 300px;
+  height: 100dvh;
+  background: #0a0a0a;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 8px 0 40px rgba(0,0,0,0.5);
+
+  &-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  &-logo {
+    height: 36px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  &-close {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    // SECONDARY = gold gradient
-    background: $gradient-primary;
-    color: $black;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 14px 32px;
-    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover { background: rgba(255,255,255,0.14); }
+  }
+
+  &-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    flex: 1;
+  }
+
+  &-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
     text-decoration: none;
-    margin: 20px 0 24px;
-    transition: $transition;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(244, 194, 39, 0.40);
+      color: $secondary;
+      background: rgba(244,194,39,0.06);
+      border-left-color: $secondary;
+      padding-left: 24px;
+    }
+
+    &--driver {
+      color: #fff;
+      font-weight: 600;
+      margin-top: 4px;
     }
   }
+
+  &-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #86efac;
+    background: #052e16;
+    border: 1px solid #86efac;
+    border-radius: 100px;
+    padding: 3px 9px;
+    animation: badge-pulse 2s ease-in-out infinite;
+  }
+
+  &-divider {
+    height: 1px;
+    margin: 0 20px;
+    background: rgba(255,255,255,0.07);
+  }
+
+  &-apps {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &-apps-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 4px;
+  }
+
+  &-store {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: $secondary;
+      background: rgba(244,194,39,0.06);
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    span {
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    strong {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+}
+
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(134,239,172,0.4); }
+  50%       { box-shadow: 0 0 0 5px rgba(134,239,172,0); }
 }
